@@ -2,14 +2,24 @@
 services:
   postgres:
     image: postgres:13
-    ports:
-      - "5835:5432" # expose pg on port 5832 to not collide with pg from elswhere
     restart: always
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_PASSWORD: Aa123456
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_DB: workplacify_db
+  workplacify:
+    image: workplacify:1.0.0
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - postgres
+
 volumes:
-  db_data:
+  postgres_data:
+
+networks:
+  default:
+    name: workplacify-network
