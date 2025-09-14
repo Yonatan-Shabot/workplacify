@@ -12,7 +12,7 @@
     "dx:next": "run-s env-install migrate-dev db-seed && next dev --experimental-https",
     "dx": "run-p dx:* --print-label",
     "dev": "npm run dx:next",
-    "env-install": "cp /mnt/env/.env .env",
+    "env-install": "cp /mnt/env/.env .env && cat .env",
     "prebuild": "run-s generate migrate",
     "build": "next build",
     "build-ci": "next build",
